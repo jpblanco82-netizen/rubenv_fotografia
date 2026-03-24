@@ -21,19 +21,39 @@ export const portfolioData: PhotographerData = {
       id: 'nocturna',
       title: 'Fotografía Nocturna',
       description: 'La magia y el misterio de los cielos oscuros. Trabajo galardonado internacionalmente.',
-      coverImage: '/images/nocturna.jpg'
+      coverImage: '/images/nocturna.jpg',
+      images: [
+        '/images/nocturna-1.jpg',
+        '/images/nocturna-2.jpg',
+        '/images/nocturna-3.jpg',
+        '/images/nocturna-4.jpg'
+      ]
     },
     {
       id: 'paisajes',
       title: 'Paisajes',
       description: 'Himalaya, Alpes y Picos de Europa. La inmensidad de la montaña.',
-      coverImage: '/images/paisajes.jpg'
+      coverImage: '/images/paisajes.jpg',
+      images: [
+        '/images/paisajes-1.jpg',
+        '/images/paisajes-2.jpg',
+        '/images/paisajes-3.jpg',
+        '/images/paisajes-4.jpg',
+        '/images/paisajes-5.jpg',
+        '/images/paisajes-6.jpg'
+      ]
     },
     {
       id: 'aerea',
       title: 'Vista de Pájaro',
       description: 'El mundo desde otra perspectiva mediante fotografía aérea y drones.',
-      coverImage: '/images/aerea.jpg'
+      coverImage: '/images/aerea.jpg',
+      images: [
+        '/images/aerea-1.jpg',
+        '/images/aerea-2.jpg',
+        '/images/aerea-3.jpg',
+        '/images/aerea-4.jpg'
+      ]
     }
   ],
   featuredProjects: [

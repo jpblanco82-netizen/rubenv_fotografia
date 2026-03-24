@@ -1,22 +1,13 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { portfolioData } from '@/constants/portfolio';
+import Header from '@/components/Header';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Header Sticky */}
-      <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/70 border-b border-white/5 transition-all duration-300">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <a href="#" className="text-sm font-semibold tracking-[0.3em] uppercase hover:text-white transition-colors duration-300">
-            {portfolioData.name}
-          </a>
-          <nav className="hidden md:flex gap-8 text-xs font-medium tracking-widest uppercase text-white/70">
-            <a href="#portfolio" className="hover:text-white transition-colors duration-300">Portfolio</a>
-            <a href="#about" className="hover:text-white transition-colors duration-300">Sobre mí</a>
-            <a href="#contact" className="hover:text-white transition-colors duration-300">Contacto</a>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
@@ -53,7 +44,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
             {portfolioData.categories.map((category) => (
-              <div key={category.id} className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer">
+              <Link href={`/${category.id}`} key={category.id} className="group relative aspect-[3/4] overflow-hidden bg-zinc-900 cursor-pointer block">
                 <Image
                   src={category.coverImage}
                   alt={category.title}
@@ -72,7 +63,7 @@ export default function Home() {
                     {category.description}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
