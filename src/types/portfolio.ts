@@ -5,12 +5,11 @@ export interface Category {
   coverImage: string;
 }
 
-export interface Project {
+export interface FeaturedProject {
   id: string;
   title: string;
   categoryId: string;
   image: string;
-  location?: string;
 }
 
 export interface PhotographerData {
@@ -22,5 +21,5 @@ export interface PhotographerData {
     profileImage: string;
   };
   categories: Category[];
-  featuredProjects: Project[];
+  featuredProjects: FeaturedProject[];
 }
