@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { portfolioData } from '@/constants/portfolio';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -69,61 +70,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-32 bg-zinc-900 relative">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="order-2 lg:order-1 space-y-8 text-white/80 font-light leading-relaxed">
-              <h2 className="text-3xl font-light tracking-[0.3em] uppercase text-white mb-10 border-l-2 border-white/30 pl-8 py-2">
-                Sobre mí
-              </h2>
-              {portfolioData.about.story.map((paragraph, index) => (
-                <p key={index} className="text-lg md:text-xl text-white/70">{paragraph}</p>
-              ))}
-              
-              <ul className="mt-12 space-y-6 pt-10 border-t border-white/10">
-                {portfolioData.about.highlights.map((highlight, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/40 mt-3 mr-6 flex-shrink-0" />
-                    <span className="text-base md:text-lg tracking-wide text-white/90">{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="order-1 lg:order-2 relative aspect-square lg:aspect-[4/5] filter grayscale hover:grayscale-0 transition-all duration-[2s]">
-               <Image
-                  src={portfolioData.about.profileImage}
-                  alt="Rubén Vela en la montaña"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer Contacto */}
-      <section id="contact" className="py-32 bg-black text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-light tracking-[0.4em] uppercase mb-12 text-white/90">Contacto</h2>
-          <p className="text-white/50 font-light tracking-widest mb-12 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-            Para proyectos, expediciones o consultas sobre prints de edición limitada, ponte en contacto.
-          </p>
-          <a href="mailto:hola@rubenvelafotografia.com" className="inline-block px-12 py-5 bg-white text-black text-xs md:text-sm font-semibold tracking-[0.2em] uppercase hover:bg-zinc-200 transition-colors duration-300">
-            Hablemos
-          </a>
-          
-          <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-white/30 tracking-widest uppercase">
-            <p>&copy; {new Date().getFullYear()} {portfolioData.name}</p>
-            <div className="flex gap-8 mt-6 md:mt-0">
-              <a href="#" className="hover:text-white transition-colors">Instagram</a>
-              <a href="#" className="hover:text-white transition-colors">Behance</a>
-              <a href="#" className="hover:text-white transition-colors">500px</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Footer />
     </main>
   );
 }

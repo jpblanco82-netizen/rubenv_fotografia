@@ -20,6 +20,7 @@ export interface PhotographerData {
     story: string[];
     highlights: string[];
     profileImage: string;
+    images?: string[];
   };
   categories: Category[];
   featuredProjects: FeaturedProject[];

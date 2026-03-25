@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
 interface LightboxImageProps {
@@ -10,6 +11,11 @@ interface LightboxImageProps {
 
 export default function LightboxImage({ imgSrc, alt }: LightboxImageProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Evitar scroll cuando está abierto
   useEffect(() => {
@@ -33,7 +39,7 @@ export default function LightboxImage({ imgSrc, alt }: LightboxImageProps) {
         onClick={() => setIsOpen(true)}
       />
       
-      {isOpen && (
+      {isOpen && mounted && createPortal(
         <div 
           className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center p-4 md:p-12 cursor-zoom-out animate-in fade-in duration-300"
           onClick={() => setIsOpen(false)}
@@ -63,7 +69,8 @@ export default function LightboxImage({ imgSrc, alt }: LightboxImageProps) {
                 <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
