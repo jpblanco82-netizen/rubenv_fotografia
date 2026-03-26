@@ -19,6 +19,22 @@ export default function Footer() {
             <a href="https://www.facebook.com/ruben.velamartin/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
           </div>
         </div>
+
+        {/* Nodal.io Personal Brand */}
+        <div className="mt-20 flex flex-col items-center justify-center gap-4 opacity-40 hover:opacity-100 transition-opacity duration-500 pb-12">
+          <a href="https://www.nodalio.es" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2 group">
+            <span className="text-white/50 font-light text-[9px] md:text-[10px] tracking-[0.2em] uppercase">
+              Designed & Developed by
+            </span>
+            <span className="text-white/80 font-bold tracking-[0.25em] text-[11px] md:text-xs group-hover:text-white transition-colors">
+              NODAL.IO
+            </span>
+          </a>
+          
+          <p className="text-[8px] md:text-[9px] tracking-[0.3em] text-white/40 font-light uppercase text-center mt-2">
+            &copy; {new Date().getFullYear()} &nbsp;&nbsp; NODAL.IO &bull; SYSTEMS &amp; PEOPLE
+          </p>
+        </div>
       </div>
     </section>
   );

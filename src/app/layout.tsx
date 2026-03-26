@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body className={`${montserrat.variable} font-sans bg-zinc-950 text-zinc-100 antialiased selection:bg-white selection:text-black`}>
+      <body className={`${montserrat.variable} font-sans bg-zinc-950 text-zinc-100 antialiased selection:bg-white selection:text-black overflow-x-hidden w-full`}>
         {children}
       </body>
     </html>
