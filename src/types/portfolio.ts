@@ -4,6 +4,7 @@ export interface Category {
   description: string;
   coverImage: string;
   images: string[];
+  videos?: string[];
 }
 
 export interface FeaturedProject {

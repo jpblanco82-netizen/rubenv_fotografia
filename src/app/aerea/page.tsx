@@ -37,6 +37,38 @@ export default function AereaPage() {
             </div>
           ))}
         </div>
+        
+        {/* Sección de Vídeos */}
+        {categoryData?.videos && categoryData.videos.length > 0 && (
+          <div className="mt-32">
+            <div className="mb-16 text-center">
+              <h2 className="text-2xl md:text-3xl font-light tracking-[0.2em] uppercase mb-4 text-white/80">
+                Tomas en movimiento
+              </h2>
+              <div className="w-8 h-[1px] bg-white/20 mx-auto"></div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {categoryData.videos.map((videoSrc, index) => (
+                <div 
+                  key={index} 
+                  className="relative bg-zinc-900 border border-white/5 aspect-video overflow-hidden group shadow-2xl"
+                >
+                  <video 
+                    src={videoSrc}
+                    poster={images[index]}
+                    controls
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="text-center mt-20">
           <Link href="/#portfolio" className="inline-block px-12 py-5 border border-white/20 text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors duration-300">

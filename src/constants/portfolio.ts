@@ -96,6 +96,11 @@ export const portfolioData: PhotographerData = {
         '/images/aerea/aerea-1.jpg',
         '/images/aerea/aerea-2.jpg',
         '/images/aerea/aerea-3.jpg'
+      ],
+      videos: [
+        '/videos/aerea/aerea-1.mov',
+        '/videos/aerea/aerea-2.mov',
+        '/videos/aerea/aerea-3.mov'
       ]
     }
   ],
