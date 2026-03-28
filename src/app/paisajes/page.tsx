@@ -7,6 +7,8 @@ import { photos } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { portfolioData } from '@/constants/portfolio';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PaisajesPage() {
   const dbPhotos = await db.query.photos.findMany({
     where: eq(photos.categoryId, 'paisajes'),
