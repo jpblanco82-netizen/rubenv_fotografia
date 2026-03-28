@@ -2,4 +2,5 @@
 
 @theme {
   --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-playfair);
 }

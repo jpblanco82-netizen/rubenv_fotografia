@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { portfolioData } from '@/constants/portfolio';
 
@@ -12,11 +13,6 @@ const InstagramIcon = () => (
   </svg>
 );
 
-const FacebookIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-  </svg>
-);
 
 const MenuIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -42,8 +38,22 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/70 border-b border-white/5 transition-all duration-300">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-sm md:text-sm font-semibold tracking-[0.3em] uppercase text-zinc-50 hover:text-white/70 transition-colors duration-300 z-50">
-            {portfolioData.name}
+          <Link href="/" className="flex items-center gap-3 md:gap-5 z-50 group transition-all duration-300">
+            <span className="text-[11px] md:text-sm font-light tracking-[0.3em] md:tracking-[0.5em] uppercase text-white/90 group-hover:text-white transition-colors duration-300">
+              Rubén Vela
+            </span>
+            <div className="relative w-24 h-12 md:w-32 md:h-16 flex-shrink-0 -my-2 overflow-hidden">
+              <Image 
+                src="/images/firma-definitiva-white.png" 
+                alt="Rubén Vela Firma" 
+                fill 
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className="text-[11px] md:text-sm font-light tracking-[0.3em] md:tracking-[0.5em] uppercase text-white/90 group-hover:text-white transition-colors duration-300">
+              Fotografía
+            </span>
           </Link>
 
           {/* Hamburger Menu Button (Mobile) */}
@@ -59,6 +69,7 @@ export default function Header() {
           <nav className="hidden md:flex gap-8 text-xs items-center font-medium tracking-widest uppercase text-white/70">
             <Link href="/#portfolio" className="hover:text-white transition-colors duration-300">Portfolio</Link>
             <Link href="/sobre-mi" className="hover:text-white transition-colors duration-300">Sobre mí</Link>
+            <Link href="/talleres" className="hover:text-white transition-colors duration-300">Talleres</Link>
             <Link href="/#contact" className="hover:text-white transition-colors duration-300">Contacto</Link>
             
             <div className="w-[1px] h-4 bg-white/20 ml-2 mr-2"></div>
@@ -67,19 +78,17 @@ export default function Header() {
               <a href="https://www.instagram.com/rubenvelafotografia/" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:scale-110 transition-all duration-300" aria-label="Instagram">
                 <InstagramIcon />
               </a>
-              <a href="https://www.facebook.com/ruben.velamartin/" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:scale-110 transition-all duration-300" aria-label="Facebook">
-                <FacebookIcon />
-              </a>
             </div>
           </nav>
         </div>
       </header>
-
+ 
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 bg-black/95 z-40 transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <nav className="flex flex-col items-center justify-center h-full gap-8 text-sm font-medium tracking-widest uppercase text-white/80">
           <Link href="/#portfolio" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2">Portfolio</Link>
           <Link href="/sobre-mi" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2">Sobre mí</Link>
+          <Link href="/talleres" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2">Talleres</Link>
           <Link href="/#contact" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2">Contacto</Link>
           
           <div className="w-12 h-[1px] bg-white/20 my-4"></div>
@@ -87,9 +96,6 @@ export default function Header() {
           <div className="flex gap-8 items-center">
             <a href="https://www.instagram.com/rubenvelafotografia/" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:scale-110 transition-all duration-300" aria-label="Instagram">
               <InstagramIcon />
-            </a>
-            <a href="https://www.facebook.com/ruben.velamartin/" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:scale-110 transition-all duration-300" aria-label="Facebook">
-              <FacebookIcon />
             </a>
           </div>
         </nav>

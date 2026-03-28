@@ -1,11 +1,19 @@
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
+import { Montserrat, Playfair_Display } from 'next/font/google';
 import './globals.css';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-montserrat',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['italic', 'normal'],
+  variable: '--font-playfair',
   display: 'swap',
 });
 
@@ -21,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body className={`${montserrat.variable} font-sans bg-zinc-950 text-zinc-100 antialiased selection:bg-white selection:text-black overflow-x-hidden w-full`}>
+      <body className={`${montserrat.variable} ${playfair.variable} font-sans bg-zinc-950 text-zinc-100 antialiased selection:bg-white selection:text-black overflow-x-hidden w-full`}>
         {children}
       </body>
     </html>

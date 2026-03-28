@@ -5,13 +5,13 @@ export const portfolioData: PhotographerData = {
   tagline: '20 años explorando cumbres, 8 años capturando su luz',
   about: {
     story: [
-      'Mi nombre es Rubén Vela Martín, nacido en un pueblo de Valladolid, donde resido. Técnico Superior de Educación y Control Medioambiental.',
-      'Desde bien pequeño, prácticamente desde que tengo uso de razón, la naturaleza y el campo han estado presentes en mi vida, de una forma continua y natural. No llegaría a los ocho años de edad, cuando en completa soledad, me iba con mi bicicleta varios kilómetros por los caminos intentando localizar a las rapaces o a lo lejos los nidos de las águilas.',
+      'Mi nombre es Rubén Vela Martín, nacido en un pueblo de Valladolid, donde resido. Técnico Superior de Educación y Control Medioambiental, de formación.',
+      'Desde bien pequeño, prácticamente desde que tengo uso de razón, la naturaleza y el campo han estado presentes en mi vida, de una forma continua y natural. No llegaría a los ocho años de edad, cuando en completa soledad, me iba con mi bicicleta varios kilómetros por los caminos intentando localizar diferentes aves.',
       'A pesar de ser una provincia sin montañas, es un punto geográfico interesante, para acceder a todas las montañas de Castilla y León, Asturias, Cantabria, y la Sierra de Gredos en el sur. Lugares donde suelo desarrollar mi actividad.',
       'En un momento dado, hace casi dos décadas, entraron en mi vida las montañas, y entraron para quedarse. A medida que empecé a desarrollar mi actividad deportiva y alpinística en este entorno, fui descubriendo un mundo mágico que me ha brindado momentos irrepetibles e inolvidables. He tenido la suerte de contemplar las montañas más salvajes y altas del mundo en el Himalaya, o ascender a varias montañas en los Alpes. Además, por supuesto, de innumerables ascensiones y escaladas en las montañas de nuestro país, especialmente en los Picos de Europa, o en mi querida Montaña Palentina donde comencé mis primeros pasos verticales.',
       'Tras muchos años contemplando paisajes impresionantes, en un momento dado, conocí la fotografía de paisaje.',
       'Fotógrafo de paisaje desde hace unos 8 años, y con la experiencia adquirida durante mi estancia en las montañas, este escenario, se convirtió para mí, en un terreno de juego inigualable para la práctica de fotografía de paisaje.',
-      'En los últimos años han cobrado especial fuerza mis fotografías nocturnas, obteniendo reconocimientos internacionales. Descubrir la fotografía nocturna me atrapó muy rápido...',
+      'En los últimos años han cobrado especial fuerza mis fotografías nocturnas, obteniendo reconocimientos internacionales, a pesar de prácticamente no participar en concursos. Disciplina en la que me encuentro muy cómodo.',
       'He tenido la suerte de poder formarme y compartir jornadas con algunos de los mejores fotógrafos de paisaje de España.'
     ],
     highlights: [
@@ -32,7 +32,7 @@ export const portfolioData: PhotographerData = {
     {
       id: 'nocturna',
       title: 'Fotografía Nocturna',
-      description: 'La magia y el misterio de los cielos oscuros. Trabajo galardonado internacionalmente.',
+      description: '"Hay veces que prefiero no dormir porque mi realidad es más bonita que mis sueños..."',
       coverImage: '/images/nocturna/nocturna.jpg',
       images: [
         '/images/nocturna/nocturna-1.jpg',
@@ -43,8 +43,8 @@ export const portfolioData: PhotographerData = {
     },
     {
       id: 'paisajes',
-      title: 'Paisajes',
-      description: 'Himalaya, Alpes y Picos de Europa. La inmensidad de la montaña.',
+      title: 'Paisaje',
+      description: '"Creí que el lugar más feliz del mundo era Disneyland, hasta que acampé por primera vez"',
       coverImage: '/images/paisajes/paisajes.jpg',
       images: [
         '/images/paisajes/paisajes-1.jpg',
@@ -58,7 +58,7 @@ export const portfolioData: PhotographerData = {
     {
       id: 'aerea',
       title: 'Vista de Pájaro',
-      description: 'El mundo desde otra perspectiva mediante fotografía aérea y drones.',
+      description: '"El mundo desde otra perspectiva mediante fotografía aérea y drones"',
       coverImage: '/images/aerea/aerea.jpg',
       images: [
         '/images/aerea/aerea-1.jpg',
@@ -68,6 +68,14 @@ export const portfolioData: PhotographerData = {
       ]
     }
   ],
+  workshops: {
+    title: 'Talleres de Fotografía',
+    description: 'Actualmente ya no llevo a cabo talleres de fotografía en grupo. Disponibilidad para talleres individuales, en las ubicaciones que aparecen en mis fotos, o en cualquier otra tras previo acuerdo y estudio de viabilidad.',
+    mainImage: '/talleres/talleres.jpg',
+    upcomingDates: [
+      { id: 1, date: 'Próximamente', location: 'Ubicaciones personalizadas', status: 'Individual Only' }
+    ]
+  },
   featuredProjects: [
     {
       id: 'hero',

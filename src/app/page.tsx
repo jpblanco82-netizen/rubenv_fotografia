@@ -24,14 +24,30 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent z-10" />
         </div>
         
-        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-20">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-[0.2em] uppercase leading-tight mb-8">
-            <span className="block font-semibold mb-2">Rubén Vela</span>
-            <span className="text-2xl md:text-3xl lg:text-4xl tracking-[0.4em] text-white/80">Fotografía</span>
+        <div className="relative z-20 text-center px-6 max-w-5xl mx-auto flex flex-col items-center mt-20">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-8 drop-shadow-2xl">
+            Fotografía de paisaje
           </h1>
-          <p className="text-lg md:text-xl font-light tracking-widest text-white/90 max-w-2xl mx-auto leading-relaxed uppercase">
-            {portfolioData.tagline}
+          <p className="text-xl md:text-2xl lg:text-3xl font-serif italic text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+            "Hay algo inexplicablemente perfecto en la naturaleza"
           </p>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+          <svg 
+            className="w-8 h-8 text-white/60" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={1.5} 
+              d="M19 9l-7 7-7-7" 
+            />
+          </svg>
         </div>
       </section>
 
