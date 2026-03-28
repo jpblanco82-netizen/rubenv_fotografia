@@ -2,11 +2,19 @@ import Link from 'next/link';
 import LightboxImage from '@/components/LightboxImage';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { db } from '@/db';
+import { photos } from '@/db/schema';
+import { eq, desc } from 'drizzle-orm';
 import { portfolioData } from '@/constants/portfolio';
 
-export default function AereaPage() {
+export default async function AereaPage() {
+  const dbPhotos = await db.query.photos.findMany({
+    where: eq(photos.categoryId, 'aerea'),
+    orderBy: [desc(photos.createdAt)],
+  });
+  
+  const images = dbPhotos.map(p => p.url);
   const categoryData = portfolioData.categories.find(c => c.id === 'aerea');
-  const images = categoryData?.images || [];
 
   return (
     <main className="min-h-screen bg-zinc-950 text-white relative pt-20">

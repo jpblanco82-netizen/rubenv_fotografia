@@ -71,6 +71,7 @@ export default function Header() {
             <Link href="/sobre-mi" className="hover:text-white transition-colors duration-300">Sobre mí</Link>
             <Link href="/talleres" className="hover:text-white transition-colors duration-300">Talleres</Link>
             <Link href="/#contact" className="hover:text-white transition-colors duration-300">Contacto</Link>
+            <Link href="/admin" className="hover:text-white transition-colors duration-300 opacity-60 text-[10px] border border-white/10 px-3 py-1 rounded-full hover:border-white/30">Zona Privada</Link>
             
             <div className="w-[1px] h-4 bg-white/20 ml-2 mr-2"></div>
             
@@ -90,6 +91,7 @@ export default function Header() {
           <Link href="/sobre-mi" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2">Sobre mí</Link>
           <Link href="/talleres" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2">Talleres</Link>
           <Link href="/#contact" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2">Contacto</Link>
+          <Link href="/admin" onClick={toggleMenu} className="hover:text-white transition-colors duration-300 py-2 text-xs opacity-60">Zona Privada</Link>
           
           <div className="w-12 h-[1px] bg-white/20 my-4"></div>
           
