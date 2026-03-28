@@ -16,7 +16,6 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} {portfolioData.name}</p>
           <div className="flex gap-8 mt-6 md:mt-0">
             <a href="https://www.instagram.com/rubenvelafotografia/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-            <a href="https://www.facebook.com/ruben.velamartin/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
           </div>
         </div>
 

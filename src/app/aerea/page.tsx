@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import LightboxImage from '@/components/LightboxImage';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { portfolioData } from '@/constants/portfolio';
 
 export default function AereaPage() {
@@ -43,6 +44,7 @@ export default function AereaPage() {
           </Link>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { portfolioData } from '@/constants/portfolio';
@@ -19,8 +20,8 @@ export default function TalleresPage() {
           <div className="w-12 h-[1px] bg-white/30 mx-auto mb-10"></div>
           
           <div className="relative">
-            <p className="text-xl md:text-2xl font-serif italic text-white/80 leading-relaxed max-w-3xl mx-auto mb-12">
-              "{workshops?.description}"
+            <p className="text-lg md:text-xl text-white/80 font-light leading-loose max-w-3xl mx-auto mb-12">
+              {workshops?.description}
             </p>
           </div>
         </div>
@@ -82,24 +83,8 @@ export default function TalleresPage() {
           </div>
         </div>
 
-        {/* Contact/CTA Section */}
-        <div className="text-center mt-32 border-t border-white/5 pt-32 mb-20">
-          <h3 className="text-xl font-light tracking-[0.2em] uppercase mb-10 text-white/90 italic font-serif">
-            ¿Te interesa un taller individual personalizado?
-          </h3>
-          <Link 
-            href="/#contact" 
-            className="inline-block px-12 py-5 border border-white/20 text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-500"
-          >
-            Contactar para formación a medida
-          </Link>
-          <div className="mt-12">
-            <Link href="/" className="text-[10px] text-white/30 uppercase tracking-[0.3em] hover:text-white transition-colors duration-300">
-              Ir al inicio
-            </Link>
-          </div>
-        </div>
       </div>
+      <Footer />
     </main>
   );
 }

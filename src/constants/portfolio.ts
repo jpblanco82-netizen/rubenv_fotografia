@@ -38,7 +38,29 @@ export const portfolioData: PhotographerData = {
         '/images/nocturna/nocturna-1.jpg',
         '/images/nocturna/nocturna-2.jpg',
         '/images/nocturna/nocturna-3.jpg',
-        '/images/nocturna/nocturna-4.jpg'
+        '/images/nocturna/nocturna-4.jpg',
+        '/images/nocturna/nocturna-5.jpg',
+        '/images/nocturna/nocturna-6.jpg',
+        '/images/nocturna/nocturna-7.jpg',
+        '/images/nocturna/nocturna-8.jpg',
+        '/images/nocturna/nocturna-9.jpg',
+        '/images/nocturna/nocturna-10.jpg',
+        '/images/nocturna/nocturna-11.jpg',
+        '/images/nocturna/nocturna-12.jpg',
+        '/images/nocturna/nocturna-13.jpg',
+        '/images/nocturna/nocturna-14.jpg',
+        '/images/nocturna/nocturna-15.jpg',
+        '/images/nocturna/nocturna-16.jpg',
+        '/images/nocturna/nocturna-17.jpg',
+        '/images/nocturna/nocturna-18.jpg',
+        '/images/nocturna/nocturna-19.jpg',
+        '/images/nocturna/nocturna-20.jpg',
+        '/images/nocturna/nocturna-21.jpg',
+        '/images/nocturna/nocturna-22.jpg',
+        '/images/nocturna/nocturna-23.jpg',
+        '/images/nocturna/nocturna-24.jpg',
+        '/images/nocturna/nocturna-25.jpg',
+        '/images/nocturna/nocturna-26.jpg'
       ]
     },
     {
@@ -52,7 +74,17 @@ export const portfolioData: PhotographerData = {
         '/images/paisajes/paisajes-3.jpg',
         '/images/paisajes/paisajes-4.jpg',
         '/images/paisajes/paisajes-5.jpg',
-        '/images/paisajes/paisajes-6.jpg'
+        '/images/paisajes/paisajes-6.jpg',
+        '/images/paisajes/paisajes-7.jpg',
+        '/images/paisajes/paisajes-8.jpg',
+        '/images/paisajes/paisajes-9.jpg',
+        '/images/paisajes/paisajes-10.jpg',
+        '/images/paisajes/paisajes-11.jpg',
+        '/images/paisajes/paisajes-12.jpg',
+        '/images/paisajes/paisajes-13.jpg',
+        '/images/paisajes/paisajes-14.jpg',
+        '/images/paisajes/paisajes-15.jpg',
+        '/images/paisajes/paisajes-16.jpg'
       ]
     },
     {
@@ -63,8 +95,7 @@ export const portfolioData: PhotographerData = {
       images: [
         '/images/aerea/aerea-1.jpg',
         '/images/aerea/aerea-2.jpg',
-        '/images/aerea/aerea-3.jpg',
-        '/images/aerea/aerea-4.jpg'
+        '/images/aerea/aerea-3.jpg'
       ]
     }
   ],
