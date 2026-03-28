@@ -55,14 +55,17 @@ export default function AereaPage() {
                   className="relative bg-zinc-900 border border-white/5 aspect-video overflow-hidden group shadow-2xl"
                 >
                   <video 
-                    src={videoSrc}
                     poster={images[index]}
                     controls
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-700"
-                  />
+                    className="w-full h-full object-cover relative z-10"
+                  >
+                    <source src={videoSrc} type="video/quicktime" />
+                    <source src={videoSrc.replace('.mov', '.mp4')} type="video/mp4" />
+                    Tu navegador no soporta la reproducción de este vídeo.
+                  </video>
                   <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 </div>
               ))}
