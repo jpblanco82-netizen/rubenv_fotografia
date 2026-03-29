@@ -11,10 +11,17 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params;
-    const { categoryId, title, description } = await request.json();
+    const { categoryId, title, description, order, type, url } = await request.json();
 
     const updatedPhoto = await db.update(photos)
-      .set({ categoryId, title, description })
+      .set({ 
+        categoryId, 
+        title: title !== undefined ? title : undefined, 
+        description: description !== undefined ? description : undefined,
+        order: order !== undefined ? order : undefined,
+        type: type !== undefined ? type : undefined,
+        url: url !== undefined ? url : undefined
+      })
       .where(eq(photos.id, parseInt(id)))
       .returning();
 
@@ -51,16 +58,17 @@ export async function DELETE(
       return NextResponse.json({ error: 'La foto no existe en la base de datos' }, { status: 404 });
     }
 
-    console.log('Foto encontrada:', photo.publicId);
+    console.log('Recurso encontrado. Tipo:', photo.type, 'PublicId:', photo.publicId);
 
-    // 2. Intentar borrar de Cloudinary si existe el publicId
-    if (photo.publicId) {
+    // 2. Intentar borrar de Cloudinary solo si es una imagen y tiene publicId
+    if (photo.type === 'image' && photo.publicId) {
       try {
+        console.log('Borrando de Cloudinary...');
         const cloudDest = await cloudinary.uploader.destroy(photo.publicId);
         console.log('Resultado Cloudinary:', cloudDest);
-      } catch (cloudErr) {
-        console.error('Error al borrar de Cloudinary:', cloudErr);
-        // Continuamos borrando de la DB aunque falle en Cloudinary para no bloquear al usuario
+      } catch (cloudErr: any) {
+        console.error('Error al borrar de Cloudinary:', cloudErr.message);
+        // Continuamos borrando de la DB aunque falle en Cloudinary
       }
     }
 

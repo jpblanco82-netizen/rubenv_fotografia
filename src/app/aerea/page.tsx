@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import LightboxImage from '@/components/LightboxImage';
+import VideoEmbed from '@/components/VideoEmbed';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { db } from '@/db';
@@ -10,12 +11,11 @@ import { portfolioData } from '@/constants/portfolio';
 export const dynamic = 'force-dynamic';
 
 export default async function AereaPage() {
-  const dbPhotos = await db.query.photos.findMany({
+  const assets = await db.query.photos.findMany({
     where: eq(photos.categoryId, 'aerea'),
     orderBy: [desc(photos.createdAt)],
   });
   
-  const images = dbPhotos.map(p => p.url);
   const categoryData = portfolioData.categories.find(c => c.id === 'aerea');
 
   return (
@@ -32,56 +32,28 @@ export default async function AereaPage() {
           </p>
         </div>
 
-        {/* Galería de Fotos Automática */}
+        {/* Galería Dinámica (Fotos y Vídeos) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
-          {images.map((imgSrc, index) => (
+          {assets.map((asset, index) => (
             <div 
-              key={index} 
+              key={asset.id} 
               className={`relative bg-zinc-900 border border-white/5 flex flex-col items-center justify-center group overflow-hidden ${index % 4 === 0 || index % 4 === 3 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-square'}`}
             >
-               <LightboxImage 
-                 imgSrc={imgSrc} 
-                 alt={`Vista aérea ${index + 1}`}
-               />
+               {asset.type === 'video' ? (
+                 <VideoEmbed 
+                   url={asset.url} 
+                   title={asset.title || 'Video aérea'} 
+                 />
+               ) : (
+                 <LightboxImage 
+                   imgSrc={asset.url} 
+                   alt={asset.title || `Vista aérea ${index + 1}`}
+                 />
+               )}
                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             </div>
           ))}
         </div>
-        
-        {/* Sección de Vídeos */}
-        {categoryData?.videos && categoryData.videos.length > 0 && (
-          <div className="mt-32">
-            <div className="mb-16 text-center">
-              <h2 className="text-2xl md:text-3xl font-light tracking-[0.2em] uppercase mb-4 text-white/80">
-                Tomas en movimiento
-              </h2>
-              <div className="w-8 h-[1px] bg-white/20 mx-auto"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {categoryData.videos.map((videoSrc, index) => (
-                <div 
-                  key={index} 
-                  className="relative bg-zinc-900 border border-white/5 aspect-video overflow-hidden group shadow-2xl"
-                >
-                  <video 
-                    poster={images[index]}
-                    controls
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover relative z-10"
-                  >
-                    <source src={videoSrc} type="video/quicktime" />
-                    <source src={videoSrc.replace('.mov', '.mp4')} type="video/mp4" />
-                    Tu navegador no soporta la reproducción de este vídeo.
-                  </video>
-                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         <div className="text-center mt-20">
           <Link href="/#portfolio" className="inline-block px-12 py-5 border border-white/20 text-white text-xs font-semibold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors duration-300">

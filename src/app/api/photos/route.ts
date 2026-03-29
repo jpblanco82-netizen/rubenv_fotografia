@@ -19,18 +19,22 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { url, publicId, categoryId, title, description } = body;
+    const { url, publicId, categoryId, title, description, type } = body;
 
-    const newPhoto = await db.insert(photos).values({
+    console.log(`[API Photos] Intentando guardar:`, { type, categoryId, url });
+
+    const newResource = await db.insert(photos).values({
       url,
-      publicId,
+      publicId: publicId || null,
       categoryId,
-      title,
-      description,
+      type: type || 'image',
+      title: title || null,
+      description: description || null,
     }).returning();
 
-    return NextResponse.json(newPhoto[0], { status: 201 });
-  } catch (error) {
-    return NextResponse.json({ error: 'Error al guardar la foto' }, { status: 500 });
+    return NextResponse.json(newResource[0], { status: 201 });
+  } catch (error: any) {
+    console.error(`[API Photos] Error al guardar:`, error.message);
+    return NextResponse.json({ error: 'Error al guardar el recurso: ' + error.message }, { status: 500 });
   }
 }
