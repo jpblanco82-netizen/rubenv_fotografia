@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import LightboxImage from '@/components/LightboxImage';
 
 export default function SobreMi() {
-  const { story, profileImage, images } = portfolioData.about;
+  const { story, profileImage, featuredImage, images } = portfolioData.about;
 
   return (
     <main className="min-h-screen bg-zinc-900 relative flex flex-col">
@@ -13,11 +13,18 @@ export default function SobreMi() {
       
       <section className="flex-grow pt-40 pb-32">
         <div className="container mx-auto px-6 max-w-6xl">
-          <div className="mb-24 flex flex-col">
-            <h1 className="text-3xl md:text-5xl font-light tracking-[0.3em] uppercase text-white mb-6 border-l-2 border-white/30 pl-8 py-2">
-              Sobre mí
-            </h1>
-            <p className="text-white/50 tracking-widest text-sm uppercase pl-8">Pasión por la montaña y la fotografía</p>
+          <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="flex flex-col">
+              <h1 className="text-3xl md:text-5xl font-light tracking-[0.3em] uppercase text-white mb-6 border-l-2 border-white/30 pl-8 py-2">
+                Sobre mí
+              </h1>
+              <p className="text-white/50 tracking-widest text-sm uppercase pl-8">Pasión por la montaña y la fotografía</p>
+            </div>
+            {featuredImage && (
+              <div className="relative aspect-[16/9] lg:aspect-[3/2] overflow-hidden rounded-sm group filter grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl shadow-black/50">
+                <LightboxImage imgSrc={featuredImage} alt="Rubén Vela - Destacada" />
+              </div>
+            )}
           </div>
           
           <div className="space-y-32">

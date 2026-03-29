@@ -21,6 +21,7 @@ export interface PhotographerData {
     story: string[];
     highlights: string[];
     profileImage: string;
+    featuredImage?: string;
     images?: string[];
   };
   categories: Category[];

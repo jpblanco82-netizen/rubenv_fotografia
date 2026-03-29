@@ -20,6 +20,7 @@ export const portfolioData: PhotographerData = {
       'Perspectivas únicas mediante fotografía aérea y vista de pájaro.'
     ],
     profileImage: '/images/sobre-mi/sobre-mi.jpg',
+    featuredImage: '/images/sobre-mi/sobre-mi-destacada.jpg',
     images: [
       '/images/sobre-mi/sobre-mi-1.jpg',
       '/images/sobre-mi/sobre-mi-2.jpg',
