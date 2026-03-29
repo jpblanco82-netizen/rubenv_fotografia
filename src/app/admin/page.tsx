@@ -22,13 +22,14 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<'image' | 'video'>('image');
   const [isAddingVideo, setIsAddingVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
-  const [videoCategory, setVideoCategory] = useState('nocturna');
+  const [videoCategory, setVideoCategory] = useState(''); // Vacío = Sin asignar
   const [videoTitle, setVideoTitle] = useState('');
 
   const fetchPhotos = async () => {
     try {
       const res = await fetch('/api/photos');
       const data = await res.json();
+      // Aseguramos que el estado siempre tenga los últimos arriba
       setPhotos(data);
     } catch (err) {
       setError('Error al cargar los recursos');
@@ -51,7 +52,7 @@ export default function AdminDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           url: videoUrl,
-          categoryId: videoCategory,
+          categoryId: videoCategory || null,
           title: videoTitle || null,
           type: 'video'
         })
@@ -61,6 +62,7 @@ export default function AdminDashboard() {
         setIsAddingVideo(false);
         setVideoUrl('');
         setVideoTitle('');
+        setVideoCategory(''); // Reset to unassigned
         fetchPhotos();
       } else {
         alert('Error al guardar el vídeo');
@@ -93,6 +95,7 @@ export default function AdminDashboard() {
   };
 
   const categories = [
+    { id: '', name: '--- Sin asignar ---' },
     { id: 'nocturna', name: 'Nocturna' },
     { id: 'paisajes', name: 'Paisajes' },
     { id: 'aerea', name: 'Aérea' }
@@ -127,7 +130,7 @@ export default function AdminDashboard() {
                         body: JSON.stringify({
                           url: info.secure_url,
                           publicId: info.public_id,
-                          categoryId: 'nocturna',
+                          categoryId: null, // Default to unassigned
                           type: 'image'
                         })
                       }).then(() => fetchPhotos());
@@ -238,8 +241,13 @@ export default function AdminDashboard() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredAssets.map((photo) => (
-              <div key={photo.id} className="bg-zinc-900 border border-white/10 rounded overflow-hidden group relative">
+              <div key={photo.id} className={`bg-zinc-900 border ${!photo.categoryId ? 'border-orange-500/30 ring-1 ring-orange-500/10' : 'border-white/10'} rounded overflow-hidden group relative transition-all`}>
                 <div className="aspect-square relative flex items-center justify-center bg-black/40">
+                  {!photo.categoryId && (
+                    <div className="absolute top-2 left-2 z-30 px-2 py-1 bg-orange-500 text-white text-[8px] font-bold uppercase tracking-widest rounded-sm shadow-lg">
+                      Pendiente
+                    </div>
+                  )}
                   {photo.type === 'video' ? (
                     <div className="flex flex-col items-center gap-3">
                       <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:scale-110 transition-transform">
@@ -269,15 +277,16 @@ export default function AdminDashboard() {
                 <div className="p-4 flex flex-col gap-3">
                   <p className="text-[10px] text-white/50 uppercase tracking-widest truncate">{photo.title || (photo.type === 'video' ? 'Vídeo sin título' : 'Fotografía')}</p>
                   <select 
-                    defaultValue={photo.categoryId}
+                    defaultValue={photo.categoryId || ''}
                     onChange={async (e) => {
                       await fetch(`/api/photos/${photo.id}`, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ categoryId: e.target.value })
+                        body: JSON.stringify({ categoryId: e.target.value || null })
                       });
+                      fetchPhotos(); // Refresh so UI updates (highlights)
                     }}
-                    className="w-full bg-black border border-white/10 p-2 text-[10px] uppercase tracking-[0.2em] outline-none focus:border-white/30"
+                    className={`w-full bg-black border ${!photo.categoryId ? 'border-orange-500/50' : 'border-white/10'} p-2 text-[10px] uppercase tracking-[0.2em] outline-none focus:border-white/30`}
                   >
                     {categories.map(cat => (
                       <option key={cat.id} value={cat.id}>{cat.name}</option>
