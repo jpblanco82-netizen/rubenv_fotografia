@@ -4,3 +4,22 @@
   --font-sans: var(--font-montserrat);
   --font-serif: var(--font-playfair);
 }
+
+/* Protección de Imágenes */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  user-select: none;
+}
+
+/* Permitir selección solo en elementos de texto necesarios */
+body {
+  user-select: none;
+}
+
+p, h1, h2, h3, span, a, button, input, textarea {
+  user-select: text;
+}

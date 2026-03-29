@@ -31,6 +31,22 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth">
       <body className={`${montserrat.variable} ${playfair.variable} font-sans bg-zinc-950 text-zinc-100 antialiased selection:bg-white selection:text-black overflow-x-hidden w-full`}>
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('contextmenu', function(e) {
+                if (e.target.tagName === 'IMG' && !window.location.pathname.startsWith('/admin')) {
+                  e.preventDefault();
+                }
+              }, false);
+              document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG' && !window.location.pathname.startsWith('/admin')) {
+                  e.preventDefault();
+                }
+              }, false);
+            `,
+          }}
+        />
       </body>
     </html>
   );
