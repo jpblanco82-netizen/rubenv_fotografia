@@ -24,12 +24,18 @@ export default function LoginPage() {
       });
 
       if (res.ok) {
-        router.push('/admin');
+        window.location.href = '/admin'; // Usamos window.location.href para asegurar un refresco de estado y cookies
       } else {
-        setError('Contraseña incorrecta');
+        const errorData = await res.json().catch(() => ({}));
+        if (res.status === 401) {
+          setError('Contraseña incorrecta');
+        } else {
+          setError(`Error del servidor (${res.status}): ${errorData.error || 'Desconocido'}`);
+        }
       }
-    } catch (err) {
-      setError('Error al conectar con el servidor');
+    } catch (err: any) {
+      console.error('Error durante el login:', err);
+      setError('Error de red: ' + err.message);
     } finally {
       setLoading(false);
     }

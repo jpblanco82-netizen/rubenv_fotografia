@@ -12,15 +12,19 @@ export async function proxy(request: NextRequest) {
   // Solo protegemos las rutas que empiezan por /admin, excepto /admin/login
   if (pathname.startsWith('/admin') && pathname !== '/admin/login' && pathname !== '/api/admin/login') {
     const token = request.cookies.get('adminToken')?.value;
+    console.log(`[Proxy] Protegiendo: ${pathname}. Token presente: ${!!token}`);
 
     if (!token) {
+      console.log(`[Proxy] Redirigiendo a login (sin token).`);
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
 
     try {
       await jose.jwtVerify(token, JWT_SECRET);
+      console.log(`[Proxy] Token verificado con éxito.`);
       return NextResponse.next();
-    } catch (e) {
+    } catch (e: any) {
+      console.error(`[Proxy] Error de verificación JWT:`, e.message);
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
   }
@@ -29,5 +33,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/admin/:path*',
+  matcher: ['/admin', '/admin/:path*'],
 };

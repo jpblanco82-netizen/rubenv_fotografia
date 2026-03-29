@@ -3,6 +3,8 @@ import { db } from '@/db';
 import { photos } from '@/db/schema';
 import { desc, eq } from 'drizzle-orm';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const allPhotos = await db.query.photos.findMany({
