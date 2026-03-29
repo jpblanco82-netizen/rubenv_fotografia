@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 export async function GET() {
   try {
     const allPhotos = await db.query.photos.findMany({
-      orderBy: [desc(photos.createdAt)],
+      orderBy: [desc(photos.createdAt), desc(photos.id)],
     });
     return NextResponse.json(allPhotos);
   } catch (error) {
@@ -26,10 +26,11 @@ export async function POST(request: NextRequest) {
     const newResource = await db.insert(photos).values({
       url,
       publicId: publicId || null,
-      categoryId,
+      categoryId: categoryId || null,
       type: type || 'image',
       title: title || null,
       description: description || null,
+      createdAt: new Date(), // EXPLICITO
     }).returning();
 
     return NextResponse.json(newResource[0], { status: 201 });

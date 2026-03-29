@@ -122,8 +122,14 @@ export default function AdminDashboard() {
               ) : (
                 <CldUploadWidget 
                   onSuccess={(result: any) => {
+                    console.log("[Admin] Cloudinary Result:", result);
                     if (result.event === 'success') {
                       const info = result.info;
+                      if (!info || !info.secure_url) {
+                        console.error("[Admin] No secure_url in Cloudinary info");
+                        return;
+                      }
+                      
                       fetch('/api/photos', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -133,7 +139,14 @@ export default function AdminDashboard() {
                           categoryId: null, // Default to unassigned
                           type: 'image'
                         })
-                      }).then(() => fetchPhotos());
+                      }).then(res => {
+                        if (res.ok) {
+                          console.log("[Admin] Photo recorded in DB");
+                          fetchPhotos();
+                        } else {
+                          console.error("[Admin] Error recording in DB");
+                        }
+                      });
                     }
                   }}
                   uploadPreset="rubenvela_uploads"

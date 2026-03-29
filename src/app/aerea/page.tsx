@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic';
 export default async function AereaPage() {
   const assets = await db.query.photos.findMany({
     where: eq(photos.categoryId, 'aerea'),
-    orderBy: [desc(photos.createdAt)],
+    orderBy: [desc(photos.createdAt), desc(photos.id)],
   });
   
   const categoryData = portfolioData.categories.find(c => c.id === 'aerea');
