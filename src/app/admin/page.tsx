@@ -19,6 +19,7 @@ export default function AdminDashboard() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState<'image' | 'video'>('image');
   const [isAddingVideo, setIsAddingVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
   const [videoCategory, setVideoCategory] = useState('nocturna');
@@ -97,48 +98,72 @@ export default function AdminDashboard() {
     { id: 'aerea', name: 'Aérea' }
   ];
 
+  const filteredAssets = photos.filter(p => p.type === activeTab);
+
   return (
     <main className="min-h-screen bg-zinc-950 text-white pt-20 flex flex-col">
       <Header />
       <div className="container mx-auto px-6 py-12 flex-grow">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-          <h1 className="text-3xl font-light tracking-[0.2em] uppercase">Panel de Control</h1>
-          
-          <div className="flex gap-4">
-            <button
-              onClick={() => setIsAddingVideo(true)}
-              className="px-8 py-4 border border-white/20 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all bg-zinc-900"
-            >
-              Añadir Vídeo (Link)
-            </button>
-
-            <CldUploadWidget 
-              onSuccess={(result: any) => {
-                if (result.event === 'success') {
-                  const info = result.info;
-                  fetch('/api/photos', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      url: info.secure_url,
-                      publicId: info.public_id,
-                      categoryId: 'nocturna',
-                      type: 'image'
-                    })
-                  }).then(() => fetchPhotos());
-                }
-              }}
-              uploadPreset="rubenvela_uploads"
-            >
-              {({ open }) => (
+        <div className="flex flex-col gap-8 mb-16">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <h1 className="text-3xl font-light tracking-[0.2em] uppercase">Panel de Control</h1>
+            
+            <div className="flex gap-4">
+              {activeTab === 'video' ? (
                 <button
-                  onClick={() => open()}
-                  className="px-8 py-4 bg-white text-black text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-zinc-200 transition-all shadow-xl"
+                  onClick={() => setIsAddingVideo(true)}
+                  className="px-8 py-4 border border-white/20 text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all bg-zinc-900"
                 >
-                  Subir Nueva Foto
+                  Añadir Vídeo (Link)
                 </button>
+              ) : (
+                <CldUploadWidget 
+                  onSuccess={(result: any) => {
+                    if (result.event === 'success') {
+                      const info = result.info;
+                      fetch('/api/photos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          url: info.secure_url,
+                          publicId: info.public_id,
+                          categoryId: 'nocturna',
+                          type: 'image'
+                        })
+                      }).then(() => fetchPhotos());
+                    }
+                  }}
+                  uploadPreset="rubenvela_uploads"
+                >
+                  {({ open }) => (
+                    <button
+                      onClick={() => open()}
+                      className="px-8 py-4 bg-white text-black text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-zinc-200 transition-all shadow-xl"
+                    >
+                      Subir Nueva Foto
+                    </button>
+                  )}
+                </CldUploadWidget>
               )}
-            </CldUploadWidget>
+            </div>
+          </div>
+
+          {/* Navegación por Pestañas */}
+          <div className="flex border-b border-white/5 gap-8">
+            <button 
+              onClick={() => setActiveTab('image')}
+              className={`pb-4 text-[10px] uppercase tracking-[0.3em] font-bold transition-all relative ${activeTab === 'image' ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
+            >
+              Imágenes
+              {activeTab === 'image' && <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white" />}
+            </button>
+            <button 
+              onClick={() => setActiveTab('video')}
+              className={`pb-4 text-[10px] uppercase tracking-[0.3em] font-bold transition-all relative ${activeTab === 'video' ? 'text-white' : 'text-white/30 hover:text-white/60'}`}
+            >
+              Vídeos
+              {activeTab === 'video' && <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white" />}
+            </button>
           </div>
         </div>
 
@@ -200,57 +225,69 @@ export default function AdminDashboard() {
 
         {error && <p className="text-red-500 mb-8">{error}</p>}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {photos.map((photo) => (
-            <div key={photo.id} className="bg-zinc-900 border border-white/10 rounded overflow-hidden group relative">
-              <div className="aspect-square relative flex items-center justify-center bg-black/40">
-                {photo.type === 'video' ? (
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:scale-110 transition-transform">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+          </div>
+        ) : filteredAssets.length === 0 ? (
+          <div className="text-center py-32 border border-dashed border-white/5 rounded">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-white/20">
+              No hay {activeTab === 'image' ? 'imágenes' : 'vídeos'} registrados
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredAssets.map((photo) => (
+              <div key={photo.id} className="bg-zinc-900 border border-white/10 rounded overflow-hidden group relative">
+                <div className="aspect-square relative flex items-center justify-center bg-black/40">
+                  {photo.type === 'video' ? (
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:scale-110 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                      <span className="text-[10px] uppercase tracking-widest text-white/40 font-bold">VÍDEO</span>
                     </div>
-                    <span className="text-[10px] uppercase tracking-widest text-white/40 font-bold">VÍDEO</span>
+                  ) : (
+                    <img src={photo.url} alt="" className="object-cover w-full h-full" />
+                  )}
+                  
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                     <button 
+                       type="button"
+                       onClick={(e) => {
+                         e.preventDefault();
+                         e.stopPropagation();
+                         handleDelete(photo.id, photo.type);
+                       }}
+                       className="p-4 bg-red-600 rounded-full hover:bg-red-700 transition-all hover:scale-110 shadow-xl pointer-events-auto relative z-20"
+                       title="Eliminar recurso"
+                     >
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                     </button>
                   </div>
-                ) : (
-                  <img src={photo.url} alt="" className="object-cover w-full h-full" />
-                )}
-                
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                   <button 
-                     type="button"
-                     onClick={(e) => {
-                       e.preventDefault();
-                       e.stopPropagation();
-                       handleDelete(photo.id, photo.type);
-                     }}
-                     className="p-4 bg-red-600 rounded-full hover:bg-red-700 transition-all hover:scale-110 shadow-xl pointer-events-auto relative z-20"
-                     title="Eliminar recurso"
-                   >
-                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                   </button>
+                </div>
+                <div className="p-4 flex flex-col gap-3">
+                  <p className="text-[10px] text-white/50 uppercase tracking-widest truncate">{photo.title || (photo.type === 'video' ? 'Vídeo sin título' : 'Fotografía')}</p>
+                  <select 
+                    defaultValue={photo.categoryId}
+                    onChange={async (e) => {
+                      await fetch(`/api/photos/${photo.id}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ categoryId: e.target.value })
+                      });
+                    }}
+                    className="w-full bg-black border border-white/10 p-2 text-[10px] uppercase tracking-[0.2em] outline-none focus:border-white/30"
+                  >
+                    {categories.map(cat => (
+                      <option key={cat.id} value={cat.id}>{cat.name}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
-              <div className="p-4 flex flex-col gap-3">
-                <p className="text-[10px] text-white/50 uppercase tracking-widest truncate">{photo.title || (photo.type === 'video' ? 'Vídeo sin título' : 'Fotografía')}</p>
-                <select 
-                  defaultValue={photo.categoryId}
-                  onChange={async (e) => {
-                    await fetch(`/api/photos/${photo.id}`, {
-                      method: 'PATCH',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ categoryId: e.target.value })
-                    });
-                  }}
-                  className="w-full bg-black border border-white/10 p-2 text-[10px] uppercase tracking-[0.2em] outline-none focus:border-white/30"
-                >
-                  {categories.map(cat => (
-                    <option key={cat.id} value={cat.id}>{cat.name}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
       <Footer />
     </main>
