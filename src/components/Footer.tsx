@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-light tracking-[0.4em] uppercase mb-12 text-white/90">Contacto</h2>
         <p className="text-white/50 font-light tracking-widest mb-12 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-          Para proyectos, expediciones o consultas sobre prints de edición limitada, ponte en contacto.
+          Para proyectos o consultas sobre impresiones de edición limitada, ponte en contacto.
         </p>
         <a href="mailto:hola@rubenvelafotografia.com" className="inline-block px-12 py-5 bg-white text-black text-xs md:text-sm font-semibold tracking-[0.2em] uppercase hover:bg-zinc-200 transition-colors duration-300">
           Hablemos

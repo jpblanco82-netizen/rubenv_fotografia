@@ -17,7 +17,7 @@ export const portfolioData: PhotographerData = {
     highlights: [
       'Fotografía Nocturna con reconocimientos internacionales.',
       'Expediciones fotográficas en el Himalaya, Alpes y Picos de Europa.',
-      'Perspectivas únicas mediante fotografía aérea y vista de pájaro.'
+      'Perspectivas únicas mediante fotografía aérea y a vista de pájaro.'
     ],
     profileImage: '/images/sobre-mi/sobre-mi.jpg',
     featuredImage: '/images/sobre-mi/sobre-mi-destacada.jpg',
@@ -90,7 +90,7 @@ export const portfolioData: PhotographerData = {
     },
     {
       id: 'aerea',
-      title: 'Vista de Pájaro',
+      title: 'A Vista de Pájaro',
       description: '"El mundo desde otra perspectiva mediante fotografía aérea y drones"',
       coverImage: '/images/aerea/aerea.jpg',
       images: [

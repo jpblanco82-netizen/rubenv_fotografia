@@ -24,7 +24,7 @@ export default async function AereaPage() {
       <div className="container mx-auto px-6 py-12">
         <div className="mb-24 text-center max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-[0.3em] uppercase mb-6 text-white/90">
-            {categoryData?.title || 'Vista de Pájaro'}
+            {categoryData?.title || 'A Vista de Pájaro'}
           </h1>
           <div className="w-12 h-[1px] bg-white/30 mx-auto mb-10"></div>
           <p className="text-xl md:text-2xl font-serif italic text-white/80 leading-relaxed max-w-2xl mx-auto">
