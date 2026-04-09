@@ -91,7 +91,7 @@ export const portfolioData: PhotographerData = {
     {
       id: 'aerea',
       title: 'A Vista de Pájaro',
-      description: '"El mundo desde otra perspectiva mediante fotografía aérea y drones"',
+      description: '"El mundo desde otra perspectiva"',
       coverImage: '/images/aerea/aerea.jpg',
       images: [
         '/images/aerea/aerea-1.jpg',

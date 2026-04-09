@@ -33,6 +33,7 @@ export default function TalleresPage() {
               src={workshops?.mainImage || '/talleres/talleres.jpg'} 
               alt="Talleres de Fotografía Rubén Vela" 
               fill
+              sizes="(max-width: 1024px) 100vw, 1024px"
               className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
               priority
             />

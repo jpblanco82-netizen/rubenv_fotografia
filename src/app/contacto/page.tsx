@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { portfolioData } from '@/constants/portfolio';
+import { sendContactEmail } from '@/actions/contact';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ export default function ContactPage() {
   });
 
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,12 +24,22 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
+    setErrorMessage('');
 
-    // Simulación de envío de correo (Fase 1)
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ nombre: '', telefono: '', email: '', descripcion: '' });
-    }, 1500);
+    try {
+      const result = await sendContactEmail(formData);
+      
+      if (result.success) {
+        setStatus('success');
+        setFormData({ nombre: '', telefono: '', email: '', descripcion: '' });
+      } else {
+        setStatus('error');
+        setErrorMessage(result.error || 'Ocurrió un error inesperado');
+      }
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage('No se pudo enviar el mensaje. Por favor, inténtalo de nuevo.');
+    }
   };
 
   return (
@@ -122,7 +133,12 @@ export default function ContactPage() {
                   ></textarea>
                 </div>
 
-                <div className="pt-8 flex justify-center">
+                <div className="pt-8 flex flex-col items-center gap-4">
+                  {status === 'error' && (
+                    <p className="text-red-400 text-[10px] tracking-[0.2em] uppercase animate-in fade-in slide-in-from-top-2 duration-300">
+                      {errorMessage}
+                    </p>
+                  )}
                   <button
                     disabled={status === 'sending'}
                     type="submit"

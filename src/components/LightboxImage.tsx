@@ -7,9 +7,10 @@ import Image from 'next/image';
 interface LightboxImageProps {
   imgSrc: string;
   alt: string;
+  priority?: boolean;
 }
 
-export default function LightboxImage({ imgSrc, alt }: LightboxImageProps) {
+export default function LightboxImage({ imgSrc, alt, priority = false }: LightboxImageProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -35,8 +36,10 @@ export default function LightboxImage({ imgSrc, alt }: LightboxImageProps) {
         src={imgSrc} 
         alt={alt}
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-transform duration-[2s] group-hover:scale-105 cursor-pointer"
         onClick={() => setIsOpen(true)}
+        priority={priority}
       />
       
       {isOpen && mounted && createPortal(

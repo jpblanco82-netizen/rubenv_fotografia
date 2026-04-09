@@ -47,6 +47,7 @@ export default function Header() {
                 src="/images/firma-definitiva-white.png" 
                 alt="Rubén Vela Firma" 
                 fill 
+                sizes="(max-width: 768px) 100px, 150px"
                 className="object-contain"
                 priority
               />
