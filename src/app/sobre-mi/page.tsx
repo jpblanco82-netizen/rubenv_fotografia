@@ -1,8 +1,15 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { portfolioData } from '@/constants/portfolio';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LightboxImage from '@/components/LightboxImage';
+
+export const metadata: Metadata = {
+  title: 'Sobre Mí - Rubén Vela Martín',
+  description: 'Conoce la historia de Rubén Vela, fotógrafo de paisaje con más de 20 años de experiencia explorando montañas y capturando la luz.',
+  keywords: ['biografía fotógrafo', 'historia Rubén Vela', 'fotografía montaña', 'alpinista y fotógrafo'],
+};
 
 export default function SobreMi() {
   const { story, profileImage, featuredImage, images } = portfolioData.about;

@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import LightboxImage from '@/components/LightboxImage';
 import VideoEmbed from '@/components/VideoEmbed';
@@ -7,6 +8,12 @@ import { db } from '@/db';
 import { photos } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { portfolioData } from '@/constants/portfolio';
+
+export const metadata: Metadata = {
+  title: 'Fotografía Aérea y Dron',
+  description: 'Perspectivas únicas a vista de pájaro. Fotografía y vídeo aéreo de paisajes naturales y abstractos.',
+  keywords: ['fotografía aérea', 'dron', 'vistas aéreas', 'paisajes desde el aire', 'DJI'],
+};
 
 export const dynamic = 'force-dynamic';
 

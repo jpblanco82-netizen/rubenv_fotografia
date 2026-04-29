@@ -1,8 +1,15 @@
+import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { portfolioData } from '@/constants/portfolio';
+
+export const metadata: Metadata = {
+  title: 'Talleres de Fotografía Individuales',
+  description: 'Formación personalizada de fotografía de paisaje y nocturna. Talleres individualizados en Picos de Europa, Montaña Palentina y más.',
+  keywords: ['talleres de fotografía', 'curso fotografía paisaje', 'clases particulares fotografía', 'Picos de Europa', 'formación fotográfica'],
+};
 
 export default function TalleresPage() {
   const { workshops } = portfolioData;

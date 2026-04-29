@@ -1,12 +1,19 @@
 import Link from 'next/link';
 import LightboxImage from '@/components/LightboxImage';
 import VideoEmbed from '@/components/VideoEmbed';
+import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { db } from '@/db';
 import { photos } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { portfolioData } from '@/constants/portfolio';
+
+export const metadata: Metadata = {
+  title: 'Fotografía de Paisaje',
+  description: 'Galería de fotografía de paisaje de Rubén Vela. Capturando la esencia de las cumbres y la naturaleza más salvaje.',
+  keywords: ['fotografía de paisaje', 'montañas', 'naturaleza', 'Picos de Europa', 'fotografía fine art'],
+};
 
 export const dynamic = 'force-dynamic';
 

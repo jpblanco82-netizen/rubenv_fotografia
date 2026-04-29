@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import LightboxImage from '@/components/LightboxImage';
 import VideoEmbed from '@/components/VideoEmbed';
@@ -7,6 +8,12 @@ import { db } from '@/db';
 import { photos } from '@/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { portfolioData } from '@/constants/portfolio';
+
+export const metadata: Metadata = {
+  title: 'Fotografía Nocturna y Vía Láctea',
+  description: 'Explora la magia de la noche. Fotografía nocturna de alta montaña, cielos estrellados y circumpolares por Rubén Vela.',
+  keywords: ['fotografía nocturna', 'vía láctea', 'estrellas', 'larga exposición', 'nocturnas montaña'],
+};
 
 export const dynamic = 'force-dynamic';
 
